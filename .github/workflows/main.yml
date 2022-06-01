@@ -19,7 +19,22 @@ jobs:
         - run: npm ci
         - run: npm run build --if-present
         - run: npm test
-  deploy: ## <-- this is the new stuff
+  sonarcloud:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      with:
+        projectBaseDir: api
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  deploy: 
         needs: build
         runs-on: ubuntu-latest
         steps:
