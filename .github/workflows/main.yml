@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x, 14.x]
+        node-version: [12.x, 14.x, 16.15.0]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
         - uses: actions/checkout@v2
@@ -19,6 +19,8 @@ jobs:
         - run: npm ci
         - run: npm run build --if-present
         - run: npm test
+        - run: npm run test:e2e
+        - run: npm run lint
         - uses: ravsamhq/notify-slack-action@v1
           if: always()
           with:
