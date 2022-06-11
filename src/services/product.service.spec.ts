@@ -7,22 +7,35 @@ describe('ProductService', () => {
     ProductService = new ProductsService();
   });
 
-  const productSnapshot = {
-    description: expect.any(String),
-    id: expect.any(Number),
-    image: expect.any(String),
-    name: expect.any(String),
-    price: expect.any(Number),
-    stock: expect.any(Number),
-  };
-
   it('return array Products', () => {
-    ProductService.findAll().forEach((product) => {
-      expect(product).toMatchSnapshot(productSnapshot);
-    });
+    expect(ProductService.findAll()).toStrictEqual([
+      {
+        description: 'bla bla',
+        id: 1,
+        image: '',
+        name: 'Product 1',
+        price: 122,
+        stock: 12,
+      },
+      {
+        description: 'bla bla 2',
+        id: 2,
+        image: '',
+        name: 'Product 2',
+        price: 433,
+        stock: 9,
+      },
+    ]);
   });
 
   it('return element one', () => {
-    expect(ProductService.findOne(1)).toMatchSnapshot(productSnapshot);
+    expect(ProductService.findOne(1)).toStrictEqual({
+      description: 'bla bla',
+      id: 1,
+      image: '',
+      name: 'Product 1',
+      price: 122,
+      stock: 12,
+    });
   });
 });
