@@ -26,11 +26,11 @@ jobs:
             status: ${{ job.status }}
             token: ${{ secrets.GITHUB_TOKEN }}
             notification_title: '{workflow} has {status_message}'
-            message_format: '{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>'
-            footer: 'Linked Repo <{repo_url}|{repo}> | <{workflow_url}|View Workflow>'
+            message_format: '{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}> on <{commit_url}|{commit_sha}>'
+            footer: 'Linked Repo <{repo_url}|{repo}> | <{workflow_url}|View Workflow> | <{run_url}|View Run>'
             notify_when: 'failure'
           env:
-            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+            SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
   sonarcloud:
     needs: build
     runs-on: ubuntu-latest
@@ -49,11 +49,11 @@ jobs:
         status: ${{ job.status }}
         token: ${{ secrets.GITHUB_TOKEN }}
         notification_title: '{workflow} has {status_message}'
-        message_format: '{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>'
-        footer: 'Linked Repo <{repo_url}|{repo}> | <{workflow_url}|View Workflow>'
+        message_format: '{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}> on <{commit_url}|{commit_sha}>'
+        footer: 'Linked Repo <{repo_url}|{repo}> | <{workflow_url}|View Workflow> | <{run_url}|View Run>'
         notify_when: 'failure'
       env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
   deploy: 
         needs: sonarcloud
         runs-on: ubuntu-latest
@@ -72,11 +72,11 @@ jobs:
               status: ${{ job.status }}
               token: ${{ secrets.GITHUB_TOKEN }}
               notification_title: '{workflow} has {status_message}'
-              message_format: '{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}> on <{commit_url}|{commit_sha}'
+              message_format: '{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}> on <{commit_url}|{commit_sha}>'
               footer: 'Linked Repo <{repo_url}|{repo}> | <{workflow_url}|View Workflow> | <{run_url}|View Run>'
               notify_when: 'failure, success'
             env:
-              SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+              SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
 
 
 
