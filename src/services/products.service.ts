@@ -19,7 +19,7 @@ export class ProductsService {
       description: 'bla bla 2',
       price: 4333,
       image: '',
-      stock: 9,
+      stock: 'kk' as any,
     },
   ];
 
