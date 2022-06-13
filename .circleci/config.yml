@@ -10,6 +10,13 @@ jobs:
       - node/install-packages
       - run:
           command: npm run test
+          name: Test
+      - run:
+          command: npm run lint
+          name: Lint
+      - run:
+          command: npm run test:e2e
+          name: E2E
 workflows:
   build-and-test:
     jobs:
