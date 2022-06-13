@@ -11,7 +11,7 @@ export class ProductsService {
       description: 'bla bla',
       price: 122,
       image: '',
-      stock: 'op' as any,
+      stock: 122,
     },
     {
       id: 2,
